@@ -1,0 +1,8 @@
+c@c.com crated account
+c@c.com logged in
+c@c.com clicked post
+c@c.com clicked additions
+c@c.com clicked upload
+c@c.com made a post
+c@c.com clicked all post
+c@c.com clicked cancel

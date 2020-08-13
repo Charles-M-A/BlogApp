@@ -1,0 +1,683 @@
+#Form for sign up
+<CreateAccountWindow>:
+    name: "create"
+
+    namee: namee
+    email: email
+    password: passw
+
+    FloatLayout:
+        cols:1
+
+        FloatLayout:
+            size: root.width, root.height/2
+
+            Label:
+                text: "Create an Account"
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":1}
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8}
+                text: "Name: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8}
+                size_hint: 0.4, 0.12
+                id: namee
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8-0.13}
+                text: "Email: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8-0.13}
+                size_hint: 0.4, 0.12
+                id: email
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8-0.13*2}
+                text: "Password: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8-0.13*2}
+                size_hint: 0.4, 0.12
+                id: passw
+                multiline: False
+                password: True
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+        Button:
+            pos_hint:{"x":0.3,"y":0.25}
+            size_hint: 0.4, 0.1
+            font_size: (root.width**2 + root.height**2) / 17**4
+            text: "Already have an Account? Log In"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.login()
+
+        Button:
+            pos_hint:{"x":0.2,"y":0.05}
+            size_hint: 0.6, 0.15
+            text: "Submit"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release:
+                root.manager.transition.direction = "left"
+                root.submit()
+
+
+
+
+
+#Login screen
+<LoginWindow>:
+    name: "login"
+
+    email: email
+    password: password
+
+    FloatLayout:
+
+        Label:
+            text:"Email: "
+            font_size: (root.width**2 + root.height**2) / 13**4
+            pos_hint: {"x":0.1, "top":0.9}
+            size_hint: 0.35, 0.15
+
+        TextInput:
+            id: email
+            font_size: (root.width**2 + root.height**2) / 13**4
+            multiline: False
+            pos_hint: {"x": 0.45 , "top":0.9}
+            size_hint: 0.4, 0.15
+
+        Label:
+            text:"Password: "
+            font_size: (root.width**2 + root.height**2) / 13**4
+            pos_hint: {"x":0.1, "top":0.7}
+            size_hint: 0.35, 0.15
+
+        TextInput:
+            id: password
+            font_size: (root.width**2 + root.height**2) / 13**4
+            multiline: False
+            password: True
+            pos_hint: {"x": 0.45, "top":0.7}
+            size_hint: 0.4, 0.15
+
+        Button:
+            pos_hint:{"x":0.2,"y":0.05}
+            size_hint: 0.6, 0.2
+            font_size: (root.width**2 + root.height**2) / 13**4
+            text: "Login"
+            on_release:
+                root.manager.transition.direction = "up"
+                root.loginBtn()
+
+        Button:
+            pos_hint:{"x":0.1,"y":0.3}
+            size_hint: 0.4, 0.1
+            font_size: (root.width**2 + root.height**2) / 17**4
+            text: "Don't have an Account? Create One"
+            on_release:
+                root.manager.transition.direction = "right"
+                root.createBtn()
+
+        Button:
+            pos_hint:{"x":0.5,"y":0.3}
+            size_hint: 0.4, 0.1
+            font_size: (root.width**2 + root.height**2) / 17**4
+            text: "Guest"
+            on_release:
+                root.manager.transition.direction = "right"
+                root.guestBtn()
+
+
+
+
+#the home screen
+<HomeWindow>:
+
+    FloatLayout:
+        Button:
+            pos_hint:{"x": 0.1, "top":0.9}
+            size_hint:0.8, 0.15
+            text: "Post "
+            on_release:
+                root.manager.transition.direction = "up"
+                root.postBtn()
+
+        Button:
+            pos_hint:{"x": 0.1, "top":0.75}
+            size_hint:0.8, 0.15
+            text: "Update Post"
+            on_release:
+                root.manager.transition.direction = "up"
+                root.updateBtn()
+
+        Button:
+            pos_hint:{"x": 0.1, "top":0.6}
+            size_hint:0.8, 0.15
+            text: "All posts"
+            on_release:
+                root.manager.transition.direction = "up"
+                root.allBtn()
+
+        Button:
+            pos_hint:{"x": 0.1, "top":0.45}
+            size_hint:0.8, 0.15
+            text: "Shared with me"
+            on_release:
+                root.manager.transition.direction = "up"
+                root.shared()
+
+        Button:
+            pos_hint:{"x":0.2, "y": 0.1}
+            size_hint:0.6,0.15
+            text: "Log Out"
+            on_release:
+                app.root.current = "login"
+                root.manager.transition.direction = "down"
+
+
+
+
+#the post creation window
+<postWindow>:
+    name: "post"
+
+    pname: pname
+    content: content
+    visibility: visibility
+
+    FloatLayout:
+        cols:1
+
+        FloatLayout:
+            size: root.width, root.height/2
+
+            Label:
+                text: "Create a new Post"
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":1}
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8}
+                text: "Post Name: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8}
+                size_hint: 0.4, 0.1
+                id: pname
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8-0.13}
+                text: "Content: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8-0.1}
+                size_hint: 0.4, 0.2
+                id: content
+                multiline: True
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8-0.13*2}
+                text: "Visibility: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8-0.15*2}
+                size_hint: 0.4, 0.1
+                id: visibility
+                text : "Private / Public"
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+        Button:
+            pos_hint:{"x":0.2,"y":0.25}
+            size_hint: 0.3, 0.1
+            font_size: (root.width**2 + root.height**2) / 17**4
+            text: "Cancel"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.cancelBtn()
+
+        Button:
+            pos_hint:{"x":0.5,"y":0.25}
+            size_hint: 0.3, 0.1
+            font_size: (root.width**2 + root.height**2) / 17**4
+            text: "Additions"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.additionBtn()
+
+        Button:
+            pos_hint:{"x":0.2,"y":0.05}
+            size_hint: 0.6, 0.15
+            text: "Post"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release:
+                root.manager.transition.direction = "left"
+                root.post()
+
+
+
+
+#for list view with selectable items
+<SelectableLabel>:
+    # Draw a background to indicate selection
+    canvas.before:
+        Color:
+            rgba: (0, 1, 0, 1) if self.selected else (.0, 0.9, .1, .3)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        Color:
+            rgba: (0, 0.9, .1, .3)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+
+
+#the user's post for updating
+<myWindow>:
+    name: "my"
+    search_results: search_results_list
+
+    FloatLayout:
+        cols:1
+
+        RecycleView:
+            size: root.width, root.height/2
+            id: search_results_list
+
+            viewclass: 'SelectableLabel'
+
+            SelectableRecycleBoxLayout:
+                default_size: None, dp(26)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: 'vertical'
+                multiselect: False
+                touch_multiselect: False
+
+        Button:
+            pos_hint:{"x":0.3,"y":0.25}
+            size_hint: 0.3, 0.1
+            font_size: (root.width**2 + root.height**2) / 17**4
+            text: "Cancel"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.cancelBtn()
+
+    BoxLayout:
+        Button:
+            pos_hint:{"x":0.1,"y":0.05}
+            size_hint: 0.4, 0.15
+            text: "Delete"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release:
+                root.manager.transition.direction = "left"
+                root.delete()
+
+        Button:
+            pos_hint:{"x":0.6,"y":0.05}
+            size_hint: 0.4, 0.15
+            text: "Update"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release:
+                root.manager.transition.direction = "left"
+                root.update()
+
+
+
+
+#the update window
+<UpdateWindow>:
+    name: "update"
+
+    pname: pname
+    content: content
+    visibility: visibility
+
+    FloatLayout:
+        cols:1
+
+        FloatLayout:
+            size: root.width, root.height/2
+
+            Label:
+                text: "Create a new Post"
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":1}
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8}
+                text: "Post Name: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8}
+                size_hint: 0.4, 0.1
+                id: pname
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8-0.13}
+                text: "Content: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8-0.1}
+                size_hint: 0.4, 0.2
+                id: content
+                multiline: True
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8-0.13*2}
+                text: "Visibility: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8-0.15*2}
+                size_hint: 0.4, 0.1
+                id: visibility
+                text : "Private / Public"
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+        Button:
+            pos_hint:{"x":0.3,"y":0.25}
+            size_hint: 0.4, 0.1
+            font_size: (root.width**2 + root.height**2) / 17**4
+            text: "Cancel"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.cancelBtn()
+
+        Button:
+            pos_hint:{"x":0.2,"y":0.05}
+            size_hint: 0.6, 0.15
+            text: "Update"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release:
+                root.manager.transition.direction = "left"
+                root.updateB()
+
+
+
+
+
+#window listing all public posts
+<allWindow>:
+    name: "all"
+    search_results: search_results_list
+
+    FloatLayout:
+        cols:1
+
+        RecycleView:
+            size: root.width, root.height/2
+            id: search_results_list
+
+            viewclass: 'SelectableLabel'
+
+            SelectableRecycleBoxLayout:
+                default_size: None, dp(26)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: 'vertical'
+                multiselect: False
+                touch_multiselect: False
+
+        Button:
+            pos_hint:{"x":0.35,"y":0.25}
+            size_hint: 0.3, 0.1
+            font_size: (root.width**2 + root.height**2) / 17**4
+            text: "Cancel"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.cancelBtn()
+
+        Button:
+            pos_hint:{"x":0.3,"y":0.05}
+            size_hint: 0.4, 0.15
+            text: "View"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release:
+                root.manager.transition.direction = "left"
+                root.view()
+
+
+
+
+#window displaying a post
+<viewWindow>:
+    name: "all"
+    head: head
+    slabel: slabel
+    comment: comment
+    com: com
+
+    FloatLayout:
+        cols:1
+
+        FloatLayout:
+            size: root.width, root.height/2
+
+            TextInput:
+                id: head
+                size_hint: 0.4, 0.2
+                pos_hint: {"x":0.05, "top":1}
+                multiline: True
+                readonly: True
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":1}
+                size_hint: 0.4, 0.2
+                id: slabel
+                multiline: True
+                readonly: True
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8-0.13}
+                text: "Comment: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8-0.1}
+                size_hint: 0.4, 0.1
+                id: comment
+                multiline: True
+                readonly: True
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8-0.13*2}
+                text: "Enter comment: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8-0.15*2}
+                size_hint: 0.4, 0.1
+                id: com
+                text : ""
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+        Button:
+            pos_hint:{"x":0.3,"y":0.25}
+            size_hint: 0.4, 0.1
+            font_size: (root.width**2 + root.height**2) / 17**4
+            text: "back"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.back()
+
+        Button:
+            pos_hint:{"x":0.2,"y":0.05}
+            size_hint: 0.6, 0.15
+            text: "Add Comment"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release:
+                root.manager.transition.direction = "left"
+                root.add()
+
+
+
+
+#window showing all shared posts
+<sharedWindow>:
+    name: "shared"
+    search_results: search_results_list
+
+    FloatLayout:
+        cols:1
+
+        RecycleView:
+            size: root.width, root.height/2
+            id: search_results_list
+
+            viewclass: 'SelectableLabel'
+
+            SelectableRecycleBoxLayout:
+                default_size: None, dp(26)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: 'vertical'
+                multiselect: False
+                touch_multiselect: False
+
+        Button:
+            pos_hint:{"x":0.35,"y":0.25}
+            size_hint: 0.3, 0.1
+            font_size: (root.width**2 + root.height**2) / 17**4
+            text: "Back"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.cancelBtn()
+
+        Button:
+            pos_hint:{"x":0.3,"y":0.05}
+            size_hint: 0.4, 0.15
+            text: "View"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release:
+                root.manager.transition.direction = "left"
+                root.viewb()
+
+
+
+<additionsWindow>:
+    name: "addition"
+
+    img: img
+    video: video
+    audio: audio
+
+    FloatLayout:
+        cols:1
+
+        FloatLayout:
+            size: root.width, root.height/2
+
+            Label:
+                text: "Upload additions"
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":1}
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8}
+                text: "Image: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8}
+                size_hint: 0.4, 0.1
+                id: img
+                text : "Enter file path"
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8-0.13}
+                text: "Video "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8-0.15}
+                size_hint: 0.4, 0.1
+                id: video
+                text : "Enter file path"
+                multiline: True
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8-0.13*2}
+                text: "Audio "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8-0.15*2}
+                size_hint: 0.4, 0.1
+                id: audio
+                text : "Enter file path"
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+        Button:
+            pos_hint:{"x":0.35,"y":0.25}
+            size_hint: 0.3, 0.1
+            font_size: (root.width**2 + root.height**2) / 17**4
+            text: "Cancel"
+            on_release:
+                root.manager.transition.direction = "left"
+                root.cancelBtn()
+
+        Button:
+            pos_hint:{"x":0.2,"y":0.05}
+            size_hint: 0.6, 0.15
+            text: "Post"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release:
+                root.manager.transition.direction = "left"
+                root.upload()
